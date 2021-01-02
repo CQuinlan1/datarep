@@ -42,7 +42,12 @@ class EmployeesDao:
 
 
     def findById(self, ID):
-        return{}
+        cursor =self.db.cursor()
+        sql = 'select from employees where ID = %s'
+        values = [ID]
+        cursor.execute(sql, values)
+        result = cursor.fetchone()
+        return self.convertoDict(result)
 
     def update(self, employee):
         cursor = self.db.cursor()
@@ -62,6 +67,10 @@ class EmployeesDao:
         return employee  
 
     def delete(self, ID):
+        cursor =self.db.cursor()
+        sql = 'delete from employees where ID = %s'
+        values = [ID]
+        cursor.execute(sql, values)
         return{}
 
     def convertToDict(self, result):

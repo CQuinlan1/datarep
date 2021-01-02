@@ -41,7 +41,7 @@ employee4 = {
 
 }
 #returnvalue = employeesDao.create(employee)
-
+#print(returnValue)
 returnValue =  employeesDao.getAll()
 print(returnValue)
 
@@ -51,8 +51,15 @@ returnValue =  employeesDao.update(employee2)
 print(returnValue)
 returnValue =  employeesDao.update(employee4)
 print(returnValue)
-returnValue =  employeesDao.delete(employee3['ID'])
-print(returnValue)
+#returnValue =  employeesDao.findById(employee3['ID'])
+#print(returnValue)
 
+print('This is a Get all')
 returnValue =  employeesDao.getAll()
 print(returnValue)
+returnValue =  employeesDao.delete(employee3['ID'])
+print(returnValue)
+returnValue =  employeesDao.getAll()
+print(returnValue)
+
+

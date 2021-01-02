@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <script> src="https://ajax.goog;eapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+        </script>
+       l 
+                <title>
+                    test get all
+                </title>
+    </head>
+    <body>
+        <button onclick+"getAll()">getAll</button>
+        <div id+"output"></div>
+        <table id="employeesTable">
+            <tr>
+                <th>Id</th></tr><th>name</th><th>age</th><th>employmentyears</th><th>nosecolour</th><th></th><th></th>
+            </>tr>
+            </table>
+        </body>
+        <script>
+            function getAll() {
+                $.ajax({
+                    "url": "http://"
+                    "method":"GET",
+                    "data":"",
+                    "dataType": "JSON",
+                    "success":function(result) {
+                        console.log(result);
+                    },
+                    "error":function(xhr, status, error){
+                        console.log("error: "+status+" msg:"+error);
+                    }
+                });
+
+            }
+        </script>
+        
+</html>
+    

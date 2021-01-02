@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <div id="create-edit" style="display:none">
+            <h3>create-edit</h3>
+            <table>
+                <tr>
+                    <td>ID</td>
+                    <td><input type="text" name="ID"></td>
+                </tr>
+                <tr>
+                    <td>employees</td>
+                    <td><input type="text" name="employees"></td>
+                </tr>
+                <tr>
+                    <td>age</td>
+                    <td><input type="text" name="age"></td>
+                </tr>
+                <tr>
+                    <td>employmentyears</td>
+                    <td><input type="text" name="employmentyears"></td>
+                </tr>
+                <tr>
+                    <td>nosecolour</td>
+                    <td><input type="text" name="nosecolour"></td>
+                </tr>
+                    <td></td><td><button id="create-edit-button">go</button></td>
+                </tr>
+            </table>
+        </div>
+        <div id="display">
+            <h3>Employees</h3>
+            <table id="employeetable" class="table">
+                <tr>
+                    <th>ID</th><th>name</th><th>age</th><th>employmentyears</th><th>nosecolour</th>
+                </tr>
+                <tr id="6">
+                    <td>6</td>
+                    <td>Blitzen</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>Black</td>
+                    <td><button onclick="showUpdate(this)">Update</button></td>
+                    <td><button onclick="doDelete(this)">Delete</button></td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            function populateTable(){
+
+
+            }
+            populateTable
+        </script>
+    </body>
+
+</html>

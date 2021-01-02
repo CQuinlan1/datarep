@@ -52,10 +52,21 @@
         </div>
         <script>
             function populateTable(){
-
-
+                // ajax getAll
+                employee = {
+                    ID:13,
+                    name:"noname",
+                    age: 43,
+                    employmentyears:40,
+                    nosecolour:"Black"
+                }
+                addemployeeToTable(employee)
             }
-            populateTable
+            function addemployeeToTable(employee){ 
+                        console.log("working so far")
+                
+             }
+            populateTable()
         </script>
     </body>
 

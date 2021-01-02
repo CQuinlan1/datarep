@@ -1,0 +1,204 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <div id="create-update" style="display:none">
+            <h3>create-edit</h3>
+            <table id="createUpdateForm">
+                <tr>
+                    <td>ID</td>
+                    <td><input type="text" name="ID" id="idInput"></td>
+                </tr>
+                <tr>
+                    <td>employees</td>
+                    <td><input type="text" name="employees"></td>
+                </tr>
+                <tr>
+                    <td>age</td>
+                    <td><input type="text" name="age"></td>
+                </tr>
+                <tr>
+                    <td>employmentyears</td>
+                    <td><input type="text" name="employmentyears"></td>
+                </tr>
+                <tr>
+                    <td>nosecolour</td>
+                    <td><input type="text" name="nosecolour"></td>
+                </tr>
+                    <td></td><td>
+                        <button id="create-button" onclick="doCreate()">Create</button></td>
+                        <button id="update-button" onclick="doUpdate()">update</button></td>
+                </tr>
+            </table>
+        </div>
+        <div id="display">
+            <h3>Employees</h3>
+            <button onclick="showCreate()">Create</button>
+            <table id="employeeTable" class="table">
+                <tr>
+                    <th>ID</th><th>name</th><th>age</th><th>employmentyears</th><th>nosecolour</th>
+                </tr>
+                   
+            </table>
+        </div>
+        <script>
+            function showCreate(){
+                 document.getElementById('display').style.display = 'none'
+                 document.getElementById('update-button').style.display = 'none' // hiding update button 
+                 document.getElementById('create-button').style.display = 'block'
+                 document.getElementById('create-update').style.display = "block"
+            }
+
+            function showUpdate(thisElem){
+                var rowElement = thisElem.parentNode.parentNode;
+                //ID = rowElement.getAttribute("id");
+                employee = readEmployeeFromRow(rowElement)
+                populateForm(employee)
+
+                document.getElementById('display').style.display = 'none'
+                document.getElementById('update-button').style.display = 'block' // hiding update button 
+                document.getElementById('create-button').style.display = 'none'
+                document.getElementById('create-update').style.display = "block"
+
+            }
+            function readEmpleeFromRow(rowElement){
+                ID = rowElement.getAttribute("id");
+            }
+            function populateForm(employee){
+                var form = document.getElementById('createUpdateForm')
+                var employee ={}
+                form.querySelector('input[name="ID"]').value = employee.ID
+                form.querySelector('input[name="ID"]').disabled=true
+                form.querySelector('input[name="name"]').value = employee.name
+                form.querySelector('input[name="age"]').value = employee.age
+                form.querySelector('input[name="employmentyears"]').value = employee.employmentyears
+                form.querySelector('input[name="nosecolour"]').value =employee.nosecolour
+                
+                
+
+            }
+            
+            function doCreate(){
+                console.log("in do Create")
+                employee= getEmployeeFromForm()
+                $.ajax({
+                    url:"/employees",
+                    data:JSON.stringify(employee),
+                    method:"POST",
+                    dataType:"JSON",
+                    contentType: "application/json; charset=utf-8",
+                    success:function(result){
+                        console.log(result)
+                        addemployeeToTable(employee)
+                        showDisplay()
+                    }
+                })
+
+                 //showDisplay()  
+            }
+
+            function doDelete(thisElem) {
+                var tableElement = document.getElementById('employeeTable');
+                        var rowElement = thisElem.parentNode.parentNode;
+                        var index = rowElement.rowIndex;
+                        ID = rowElement.getAttribute("id");
+                        console.log(ID)
+                        //$.ajax({
+                         //  url:"/employees/"+ID,
+                        //   method:"DELETE",
+                        //   dataType:"JSON",
+                       //    success:function(result){           
+
+                      // },
+                      //     err:function(xhr,status,error){
+                    //          console.log(error)
+                     // }
+                      //  })
+                        tableElement.deleteRow(index); // above deletes from database so am waititng till  url sorted 
+
+
+
+
+            }
+            function getEmployeeFromForm(){
+                var form = document.getElementById('createUpdateForm')
+                var employee ={}
+                
+                employee.ID = form.querySelector('input[name="ID"]').value
+                employee.name = form.querySelector('input[name="name"]').value
+                employee.age = form.querySelector('input[name="age"]').value
+                employee.employmentyears = form.querySelector('input[name="employmentyears"]').value
+                employee.nosecolour = form.querySelector('input[name="nosecolour"]').value
+                console.log(employee)
+                return employee
+            }
+            function showDisplay(){
+                 document.getElementById('display').style.display = 'block'
+                 document.getElementById('create-update').style.display = "none"
+            }
+            function populateTable(){
+                // ajax getAll
+                //employee = {
+                   // ID:13,
+                   // name:"noname",
+                   // age: 43,
+                   // employmentyears:40,
+                   // nosecolour:"Black"
+
+                   $ajax({
+                       url:'http:......',   /// to sort 
+                       method: 'GET',
+                       datatype:'JSON',
+                       success:function(results){
+                            for (employee of results){
+                                addemployeeToTable(employee)
+                            }
+
+                       },
+                    error:function (xhr, status, error){
+                        console.log ("error"+error+"code"+status)
+                    }
+                   }) 
+                }
+                //addemployeeToTable(employee)
+            }
+            function addemployeeToTable(employee){ 
+                  //  console.log("working so far") //WORKED
+                tableElem = document.getElementById("employeeTable")
+                rowElem =tableElem.insertRow(-1)
+                //rowElem.setAttribute("id", employee.ID) //not working maybe because it was a primary key?
+                cell1=rowElem.insertCell(0)
+                cell1.innerHTML = employee.ID
+
+                cell2=rowElem.insertCell(1)
+                cell2.innerHTML = employee.name
+
+                cell3=rowElem.insertCell(2)
+                cell3.innerHTML = employee.age
+
+                cell4=rowElem.insertCell(3)
+                cell4.innerHTML = employee.employmentyears
+
+                cell5=rowElem.insertCell(4)
+                cell5.innerHTML = employee.nosecolour
+
+                cell6=rowElem.insertCell(5)
+                cell6.innerHTML = '<button onclick="showUpdate(this)">Update</button>'
+
+                cell7=rowElem.insertCell(6)
+                cell7.innerHTML = '<button onclick="doDelete(this)">Delete</button>'
+
+              
+
+                
+
+             }
+            populateTable()
+        </script>
+    </body>
+
+</html>

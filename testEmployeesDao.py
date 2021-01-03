@@ -2,9 +2,9 @@ from EmployeesDao import employeesDao
 
 employee1 = {
     'ID':1,
-    'name': 'Dasher',
-    'age' : 8,
-    'employmentyears':7,
+    'name': 'Daser',
+    'age' : 80,
+    'employmentyears':70,
     'nosecolour': 'Black'
 
 
@@ -45,16 +45,17 @@ employee4 = {
 returnValue =  employeesDao.getAll()
 print(returnValue)
 
+returnValue =  employeesDao.update(employee1)
+print(returnValue)
+
 returnValue =  employeesDao.update(employee3)
-print(returnValue)
-returnValue =  employeesDao.update(employee2)
-print(returnValue)
+#print(returnValue)
 returnValue =  employeesDao.update(employee4)
 print(returnValue)
 #returnValue =  employeesDao.findById(employee3['ID'])
 #print(returnValue)
 
-print('This is a Get all')
+print('This is a Get all') # coming in as tuple
 returnValue =  employeesDao.getAll()
 print(returnValue)
 returnValue =  employeesDao.delete(employee3['ID'])

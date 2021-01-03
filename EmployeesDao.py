@@ -1,13 +1,14 @@
 import mysql.connector
+import dbconfig as cfg
 
 class EmployeesDao:
     db = " "
     def __init__(self):
         self.db = mysql.connector.connect(
-            host = 'localhost',
-            user = 'root',
-            password = 'password',
-            database = 'DataRep'
+            host = cfg.mysql['host'],
+            user = cfg.mysql['user'],
+            password = cfg.mysql['password'],
+            database = cfg.mysql['database']
         )
         #print("connection made")
     
